@@ -10,12 +10,19 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: gray;
+    padding: 32px;
 }
 
 .number-line {
     width: 19rem;
     display: flex;
     justify-content: flex-end;
+    background-color: steelblue;
+}
+
+.number-line h1 {
+    padding-right: 16px;
 }
 
 .container {
@@ -32,7 +39,7 @@ body {
 .number-buttons {
     display: flex;
     flex-wrap: wrap;
-    width: 14.1rem;
+    width: 14.3rem;
     height:17rem;
 }
 
@@ -44,7 +51,7 @@ body {
 
 .zero-container {
     display:flex;
-    width: 14.1rem;
+    width: 14.3rem;
 }
 
 .button {
@@ -53,6 +60,7 @@ body {
     align-items: center;
     padding: 2rem;
     height: 3rem;
+    font-weight: bold;
 }
 
 .button.zero {
