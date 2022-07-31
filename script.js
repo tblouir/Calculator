@@ -24,10 +24,13 @@ let oneDecimal = true;
 let pressTwice = false;
 let array = [];
 
+console.log(parseFloat('='))
+
 buttons.forEach(button => button.addEventListener('click', e => {
-    if (typeof parseFloat(e.target.textContent) === 'number' || e.target === decimal) {
-        if (oneDecimal || typeof parseFloat(e.target.textContent) === 'number') {
+    if (!isNaN(e.target.textContent) || e.target === decimal) {
+        if (oneDecimal || !isNaN(e.target.textContent)) {
             array.push(e.target.textContent);
+
             if (array[0] === '.') {
                 array.unshift(0);
                 number = parseFloat(array.join(''));
@@ -39,6 +42,7 @@ buttons.forEach(button => button.addEventListener('click', e => {
                 numberLine.textContent = number;
             }
         }
+
         if (e.target === decimal) {
             oneDecimal = false;
         }
@@ -47,11 +51,11 @@ buttons.forEach(button => button.addEventListener('click', e => {
     if (e.target.textContent === 'Clear') {
         clearArray();
         numberLine.textContent = 0;
-        previousValue = 0;
         currentValue = 0;
         runningValue = 0;
         pressTwice = false;
         oneDecimal = true;
+        lastOperator = undefined;
     }
 
     if (e.target === add || e.target === subtract || e.target === multiply || e.target === divide) {
@@ -77,6 +81,7 @@ buttons.forEach(button => button.addEventListener('click', e => {
                 default:
                     console.log("DEFAULT")
             }
+            lastOperator = e.target;
         };
 
         if (runningValue === 0) {
@@ -88,27 +93,29 @@ buttons.forEach(button => button.addEventListener('click', e => {
     }
 
     if (e.target === submit) {
-        switch (lastOperator) {
-            case add:
-                calculateNumber(addition);
-                break;
-            case subtract:
-                calculateNumber(subtraction);
-                break;
-            case multiply:
-                calculateNumber(multiplication);
-                break;
-            case divide:
-                calculateNumber(division);
-                break;
-            default:
-                console.log("DEFAULT")
+        if (lastOperator === undefined) {
+            numberLine.textContent = currentValue;
+        } else {
+            switch (lastOperator) {
+                case add:
+                    calculateNumber(addition);
+                    break;
+                case subtract:
+                    calculateNumber(subtraction);
+                    break;
+                case multiply:
+                    calculateNumber(multiplication);
+                    break;
+                case divide:
+                    calculateNumber(division);
+                    break;
+                default:
+                    console.log("DEFAULT")
+            }
         }
     }
 })
 );
-
-
 
 function addition() {
     return runningValue += currentValue;
@@ -136,4 +143,5 @@ function calculateNumber(operator) {
     console.log('Running Value: ' + runningValue);
     console.log('Current Value: ' + currentValue);
     pressTwice = false;
+    clearArray();
 }
