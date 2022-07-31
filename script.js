@@ -1,13 +1,13 @@
-// let one = document.querySelector('.one')
-// let two = document.querySelector('.two')
-// let three = document.querySelector('.three')
-// let four = document.querySelector('.four')
-// let five = document.querySelector('.five')
-// let six = document.querySelector('.six')
-// let seven = document.querySelector('.seven')
-// let eight = document.querySelector('.eight')
-// let nine = document.querySelector('.nine')
-// let zero = document.querySelector('.zero')
+let one = document.querySelector('.one')
+let two = document.querySelector('.two')
+let three = document.querySelector('.three')
+let four = document.querySelector('.four')
+let five = document.querySelector('.five')
+let six = document.querySelector('.six')
+let seven = document.querySelector('.seven')
+let eight = document.querySelector('.eight')
+let nine = document.querySelector('.nine')
+let zero = document.querySelector('.zero')
 let decimal = document.querySelector('.decimal')
 let clear = document.querySelector('.clear')
 let add = document.querySelector('.add')
@@ -24,7 +24,69 @@ let oneDecimal = true;
 let pressTwice = false;
 let array = [];
 
-console.log(parseFloat('='))
+document.addEventListener('keydown', (key => {
+    let value = key.key
+    if (parseInt(value) >= 0 || value=== '-' || value === '+' || value === '/' || value === '*' || value === '.' || value === '=' || value === 'Enter' || value === 'Backspace') {
+        switch (value) {
+            case '0':
+                zero.click();
+                break;
+            case '1':
+                one.click();
+                break;
+            case '2':
+                two.click();
+                break;
+            case '3':
+                three.click();
+                break;
+            case '4':
+                four.click();
+                break;
+            case '5':
+                five.click();
+                break;
+            case '6':
+                six.click();
+                break;
+            case '7':
+                seven.click();
+                break;
+            case '8':
+                eight.click();
+                break;
+            case '9':
+                nine.click();
+                break;
+            case '-':
+                subtract.click();
+                break;
+            case '+':
+                add.click();
+                break;
+            case '*':
+                multiply.click();
+                break;
+            case '/':
+                divide.click();
+                break;
+            case '.':
+                decimal.click();
+                break;
+            case '=':
+                submit.click();
+                break;
+            case 'Enter':
+                submit.click();
+                break;
+            case 'Backspace':
+                clear.click();
+                break;
+            default:
+                console.log("ERROR");
+        }
+    }
+}))
 
 buttons.forEach(button => button.addEventListener('click', e => {
     if (!isNaN(e.target.textContent) || e.target === decimal) {
@@ -48,7 +110,7 @@ buttons.forEach(button => button.addEventListener('click', e => {
         }
     }
 
-    if (e.target.textContent === 'Clear') {
+    if (e.target === clear) {
         clearArray();
         numberLine.textContent = 0;
         currentValue = 0;
@@ -80,8 +142,8 @@ buttons.forEach(button => button.addEventListener('click', e => {
                     break;
                 default:
                     console.log("DEFAULT")
-            }
-            lastOperator = e.target;
+                }
+                lastOperator = e.target;
         };
 
         if (runningValue === 0) {
@@ -112,6 +174,7 @@ buttons.forEach(button => button.addEventListener('click', e => {
                 default:
                     console.log("DEFAULT")
             }
+            lastOperator = e.target;
         }
     }
 })
